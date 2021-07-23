@@ -1,0 +1,427 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="TantaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="alumnos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombres" Type="varchar" MaxLength="200" />
+          <Property Name="apellidos" Type="varchar" MaxLength="200" />
+          <Property Name="edad" Type="int" />
+          <Property Name="fec_reg" Type="date" />
+          <Property Name="fec_act" Type="date" />
+          <Property Name="genero" Type="bit" />
+          <Property Name="tipodocumento_id" Type="int" />
+        </EntityType>
+        <EntityType Name="alumnos_cursos">
+          <Key>
+            <PropertyRef Name="curso_id" />
+            <PropertyRef Name="alumno_id" />
+          </Key>
+          <Property Name="curso_id" Type="int" Nullable="false" />
+          <Property Name="alumno_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="categorias">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" />
+          <Property Name="categoria_id" Type="int" />
+          <Property Name="fec_reg" Type="date" />
+          <Property Name="fec_act" Type="date" />
+          <Property Name="nivel" Type="int" />
+        </EntityType>
+        <EntityType Name="cursos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombres" Type="varchar" MaxLength="200" />
+          <Property Name="fec_reg" Type="date" />
+          <Property Name="fec_act" Type="date" />
+        </EntityType>
+        <EntityType Name="notas">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="alumno_id" Type="int" Nullable="false" />
+          <Property Name="curso_id" Type="int" Nullable="false" />
+          <Property Name="estado_id" Type="int" />
+          <Property Name="nota1" Type="int" />
+          <Property Name="nota2" Type="int" />
+          <Property Name="nota3" Type="int" />
+          <Property Name="nota4" Type="int" />
+          <Property Name="notafinal" Type="int" />
+        </EntityType>
+        <Association Name="FK__alumnos__tipodoc__2D27B809">
+          <End Role="categorias" Type="Self.categorias" Multiplicity="0..1" />
+          <End Role="alumnos" Type="Self.alumnos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="categorias">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="alumnos">
+              <PropertyRef Name="tipodocumento_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__categoria__categ__300424B4">
+          <End Role="categorias" Type="Self.categorias" Multiplicity="0..1" />
+          <End Role="categorias1" Type="Self.categorias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="categorias">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="categorias1">
+              <PropertyRef Name="categoria_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_alumnos_cursos_alumnos">
+          <End Role="alumnos" Type="Self.alumnos" Multiplicity="1" />
+          <End Role="alumnos_cursos" Type="Self.alumnos_cursos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="alumnos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="alumnos_cursos">
+              <PropertyRef Name="alumno_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_alumnos_cursos_cursos">
+          <End Role="cursos" Type="Self.cursos" Multiplicity="1" />
+          <End Role="alumnos_cursos" Type="Self.alumnos_cursos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cursos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="alumnos_cursos">
+              <PropertyRef Name="curso_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_notas_alumnos">
+          <End Role="alumnos" Type="Self.alumnos" Multiplicity="1" />
+          <End Role="notas" Type="Self.notas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="alumnos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="notas">
+              <PropertyRef Name="alumno_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_notas_categorias">
+          <End Role="categorias" Type="Self.categorias" Multiplicity="0..1" />
+          <End Role="notas" Type="Self.notas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="categorias">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="notas">
+              <PropertyRef Name="estado_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_notas_cursos">
+          <End Role="cursos" Type="Self.cursos" Multiplicity="1" />
+          <End Role="notas" Type="Self.notas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cursos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="notas">
+              <PropertyRef Name="curso_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TantaModelStoreContainer">
+          <EntitySet Name="alumnos" EntityType="Self.alumnos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="alumnos_cursos" EntityType="Self.alumnos_cursos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="categorias" EntityType="Self.categorias" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cursos" EntityType="Self.cursos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="notas" EntityType="Self.notas" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__alumnos__tipodoc__2D27B809" Association="Self.FK__alumnos__tipodoc__2D27B809">
+            <End Role="categorias" EntitySet="categorias" />
+            <End Role="alumnos" EntitySet="alumnos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__categoria__categ__300424B4" Association="Self.FK__categoria__categ__300424B4">
+            <End Role="categorias" EntitySet="categorias" />
+            <End Role="categorias1" EntitySet="categorias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_alumnos_cursos_alumnos" Association="Self.FK_alumnos_cursos_alumnos">
+            <End Role="alumnos" EntitySet="alumnos" />
+            <End Role="alumnos_cursos" EntitySet="alumnos_cursos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_alumnos_cursos_cursos" Association="Self.FK_alumnos_cursos_cursos">
+            <End Role="cursos" EntitySet="cursos" />
+            <End Role="alumnos_cursos" EntitySet="alumnos_cursos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_notas_alumnos" Association="Self.FK_notas_alumnos">
+            <End Role="alumnos" EntitySet="alumnos" />
+            <End Role="notas" EntitySet="notas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_notas_categorias" Association="Self.FK_notas_categorias">
+            <End Role="categorias" EntitySet="categorias" />
+            <End Role="notas" EntitySet="notas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_notas_cursos" Association="Self.FK_notas_cursos">
+            <End Role="cursos" EntitySet="cursos" />
+            <End Role="notas" EntitySet="notas" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TantaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="TantaEntities" annotation:LazyLoadingEnabled="true" >
+          <EntitySet Name="alumnos" EntityType="TantaModel.alumno" />
+          <EntitySet Name="categorias" EntityType="TantaModel.categoria" />
+          <EntitySet Name="cursos" EntityType="TantaModel.curso" />
+          <EntitySet Name="notas" EntityType="TantaModel.nota" />
+          <AssociationSet Name="FK__alumnos__tipodoc__2D27B809" Association="TantaModel.FK__alumnos__tipodoc__2D27B809">
+            <End Role="categoria" EntitySet="categorias" />
+            <End Role="alumno" EntitySet="alumnos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_notas_alumnos" Association="TantaModel.FK_notas_alumnos">
+            <End Role="alumno" EntitySet="alumnos" />
+            <End Role="nota" EntitySet="notas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__categoria__categ__300424B4" Association="TantaModel.FK__categoria__categ__300424B4">
+            <End Role="categoria" EntitySet="categorias" />
+            <End Role="categoria1" EntitySet="categorias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_notas_categorias" Association="TantaModel.FK_notas_categorias">
+            <End Role="categoria" EntitySet="categorias" />
+            <End Role="nota" EntitySet="notas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_notas_cursos" Association="TantaModel.FK_notas_cursos">
+            <End Role="curso" EntitySet="cursos" />
+            <End Role="nota" EntitySet="notas" />
+          </AssociationSet>
+          <AssociationSet Name="alumnos_cursos" Association="TantaModel.alumnos_cursos">
+            <End Role="alumno" EntitySet="alumnos" />
+            <End Role="curso" EntitySet="cursos" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="alumno">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombres" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="apellidos" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="edad" Type="Int32" />
+          <Property Name="fec_reg" Type="DateTime" Precision="0" />
+          <Property Name="fec_act" Type="DateTime" Precision="0" />
+          <Property Name="genero" Type="Boolean" />
+          <Property Name="tipodocumento_id" Type="Int32" />
+          <NavigationProperty Name="categoria" Relationship="TantaModel.FK__alumnos__tipodoc__2D27B809" FromRole="alumno" ToRole="categoria" />
+          <NavigationProperty Name="notas" Relationship="TantaModel.FK_notas_alumnos" FromRole="alumno" ToRole="nota" />
+          <NavigationProperty Name="cursos" Relationship="TantaModel.alumnos_cursos" FromRole="alumno" ToRole="curso" />
+        </EntityType>
+        <EntityType Name="categoria">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="categoria_id" Type="Int32" />
+          <Property Name="fec_reg" Type="DateTime" Precision="0" />
+          <Property Name="fec_act" Type="DateTime" Precision="0" />
+          <Property Name="nivel" Type="Int32" />
+          <NavigationProperty Name="alumnos" Relationship="TantaModel.FK__alumnos__tipodoc__2D27B809" FromRole="categoria" ToRole="alumno" />
+          <NavigationProperty Name="categorias1" Relationship="TantaModel.FK__categoria__categ__300424B4" FromRole="categoria" ToRole="categoria1" />
+          <NavigationProperty Name="categoria1" Relationship="TantaModel.FK__categoria__categ__300424B4" FromRole="categoria1" ToRole="categoria" />
+          <NavigationProperty Name="notas" Relationship="TantaModel.FK_notas_categorias" FromRole="categoria" ToRole="nota" />
+        </EntityType>
+        <EntityType Name="curso">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombres" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="fec_reg" Type="DateTime" Precision="0" />
+          <Property Name="fec_act" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="notas" Relationship="TantaModel.FK_notas_cursos" FromRole="curso" ToRole="nota" />
+          <NavigationProperty Name="alumnos" Relationship="TantaModel.alumnos_cursos" FromRole="curso" ToRole="alumno" />
+        </EntityType>
+        <EntityType Name="nota">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="alumno_id" Type="Int32" Nullable="false" />
+          <Property Name="curso_id" Type="Int32" Nullable="false" />
+          <Property Name="estado_id" Type="Int32" />
+          <Property Name="nota1" Type="Int32" />
+          <Property Name="nota2" Type="Int32" />
+          <Property Name="nota3" Type="Int32" />
+          <Property Name="nota4" Type="Int32" />
+          <Property Name="notafinal" Type="Int32" />
+          <NavigationProperty Name="alumno" Relationship="TantaModel.FK_notas_alumnos" FromRole="nota" ToRole="alumno" />
+          <NavigationProperty Name="categoria" Relationship="TantaModel.FK_notas_categorias" FromRole="nota" ToRole="categoria" />
+          <NavigationProperty Name="curso" Relationship="TantaModel.FK_notas_cursos" FromRole="nota" ToRole="curso" />
+        </EntityType>
+        <Association Name="FK__alumnos__tipodoc__2D27B809">
+          <End Type="TantaModel.categoria" Role="categoria" Multiplicity="0..1" />
+          <End Type="TantaModel.alumno" Role="alumno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="categoria">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="alumno">
+              <PropertyRef Name="tipodocumento_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_notas_alumnos">
+          <End Type="TantaModel.alumno" Role="alumno" Multiplicity="1" />
+          <End Type="TantaModel.nota" Role="nota" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="alumno">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="nota">
+              <PropertyRef Name="alumno_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__categoria__categ__300424B4">
+          <End Type="TantaModel.categoria" Role="categoria" Multiplicity="0..1" />
+          <End Type="TantaModel.categoria" Role="categoria1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="categoria">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="categoria1">
+              <PropertyRef Name="categoria_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_notas_categorias">
+          <End Type="TantaModel.categoria" Role="categoria" Multiplicity="0..1" />
+          <End Type="TantaModel.nota" Role="nota" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="categoria">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="nota">
+              <PropertyRef Name="estado_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_notas_cursos">
+          <End Type="TantaModel.curso" Role="curso" Multiplicity="1" />
+          <End Type="TantaModel.nota" Role="nota" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="curso">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="nota">
+              <PropertyRef Name="curso_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="alumnos_cursos">
+          <End Type="TantaModel.alumno" Role="alumno" Multiplicity="*" />
+          <End Type="TantaModel.curso" Role="curso" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TantaModelStoreContainer" CdmEntityContainer="TantaEntities" >
+          <EntitySetMapping Name="alumnos">
+            <EntityTypeMapping TypeName="TantaModel.alumno">
+              <MappingFragment StoreEntitySet="alumnos">
+                <ScalarProperty Name="tipodocumento_id" ColumnName="tipodocumento_id" />
+                <ScalarProperty Name="genero" ColumnName="genero" />
+                <ScalarProperty Name="fec_act" ColumnName="fec_act" />
+                <ScalarProperty Name="fec_reg" ColumnName="fec_reg" />
+                <ScalarProperty Name="edad" ColumnName="edad" />
+                <ScalarProperty Name="apellidos" ColumnName="apellidos" />
+                <ScalarProperty Name="nombres" ColumnName="nombres" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="categorias">
+            <EntityTypeMapping TypeName="TantaModel.categoria">
+              <MappingFragment StoreEntitySet="categorias">
+                <ScalarProperty Name="nivel" ColumnName="nivel" />
+                <ScalarProperty Name="fec_act" ColumnName="fec_act" />
+                <ScalarProperty Name="fec_reg" ColumnName="fec_reg" />
+                <ScalarProperty Name="categoria_id" ColumnName="categoria_id" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cursos">
+            <EntityTypeMapping TypeName="TantaModel.curso">
+              <MappingFragment StoreEntitySet="cursos">
+                <ScalarProperty Name="fec_act" ColumnName="fec_act" />
+                <ScalarProperty Name="fec_reg" ColumnName="fec_reg" />
+                <ScalarProperty Name="nombres" ColumnName="nombres" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="notas">
+            <EntityTypeMapping TypeName="TantaModel.nota">
+              <MappingFragment StoreEntitySet="notas">
+                <ScalarProperty Name="notafinal" ColumnName="notafinal" />
+                <ScalarProperty Name="nota4" ColumnName="nota4" />
+                <ScalarProperty Name="nota3" ColumnName="nota3" />
+                <ScalarProperty Name="nota2" ColumnName="nota2" />
+                <ScalarProperty Name="nota1" ColumnName="nota1" />
+                <ScalarProperty Name="estado_id" ColumnName="estado_id" />
+                <ScalarProperty Name="curso_id" ColumnName="curso_id" />
+                <ScalarProperty Name="alumno_id" ColumnName="alumno_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="alumnos_cursos" TypeName="TantaModel.alumnos_cursos" StoreEntitySet="alumnos_cursos">
+            <EndProperty Name="curso">
+              <ScalarProperty Name="id" ColumnName="curso_id" />
+            </EndProperty>
+            <EndProperty Name="alumno">
+              <ScalarProperty Name="id" ColumnName="alumno_id" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

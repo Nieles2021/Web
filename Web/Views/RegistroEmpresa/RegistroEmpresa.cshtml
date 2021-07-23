@@ -1,0 +1,160 @@
+﻿
+@{
+    ViewBag.Title = "RegistroEmpresa";
+    Layout = null;
+}
+
+<html>
+<head>
+    <title>Registro de empresa</title>
+    <!--CSS-->
+    <link  href="~/Content/plugins/css/bootstrap.min.css" rel="stylesheet"/>
+    <!--JS-->
+    <script src="~/Content/plugins/js/jquery-3.1.1.min.js"></script>
+    <script src="~/Content/plugins/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <br /><br /><br />
+    <div class="container">
+        <div class="row">
+            <div class="divregistroempresa">
+
+                <div class="col-md-12">
+                    <div class="col-md-3">
+                        <span><label><b>Registrar Empresa</b></label></span>
+                    </div>
+                </div>
+
+                <br /><br /><br />
+
+                <div class="col-md-12">
+                    <div class="col-md-3">
+                        <img src="~/Content/img/img_logo/TuLogo.png" alt="Avatar" width="80px" class="img-circle previous" />
+                        <label for="imagen" class="input-label"><i class="fa fa-cloud-upload"></i>Subir Imagen</label>
+                        <input type="file" name="imagen" id="imagen" />
+                    </div>
+
+                    <div class="col-md-6">
+                        <span><label><b>Razon Social:</b></label></span>
+                        <input type="text" class="form-control" id="txtrazonsocial" />
+                    </div>
+
+                    <div class="col-md-3">
+                        <span><label><b>RUC:</b></label></span>
+                        <input type="text" class="form-control" id="txtruc" />
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="col-md-3">
+
+                    </div>
+
+                    <div class="col-md-4">
+                        <span><label><b>Email:</b></label></span>
+                        <input type="email" class="form-control" id="txtremail" />
+                    </div>
+
+                    <div class="col-md-3">
+                        <span><label><b>País:</b></label></span>
+                        <select class="form-control" id="slpais">
+                            <option value="value">Perú</option>
+                            <option value="value">Chile</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-2">
+                        <span><label><b>Moneda:</b></label></span>
+                        <select class="form-control" id="slmoneda">
+                            <option value="value">Soles</option>
+                            <option value="value">Dolares</option>
+                        </select>
+                    </div>
+
+                </div>
+                <div class="col-md-12">
+                    <div class="col-md-3">
+                    </div>
+                    <div class="col-md-9">
+                        <span><label><b>Dirección</b></label></span>
+                        <input type="text" class="form-control" id="txtdireccion" />
+                        <br />
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="col-md-3">
+                    </div>
+                    <div class="col-md-3">
+                        <span><label><b>¿Vende con impuesto?</b></label></span>
+                    </div>
+                    <div class="col-md-6">
+                        SI<input type="radio" id="rdsi" />
+                        &nbsp;&nbsp;&nbsp;
+                        NO<input type="radio" id="rdno" />
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <br />
+                    <div class="col-md-3">
+
+                    </div>
+                    <div class="col-md-2">
+                        <span><label><b>Tipo impuesto:</b></label></span>
+                        <select class="form-control" id="sltimpuesto">
+                            <option value="value">Perú</option>
+                            <option value="value">Chile</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-2">
+                        <span><label><b>Porcentaje:</b></label></span>
+                        <select class="form-control" id="sliporcentaje">
+                            <option value="value">Soles</option>
+                            <option value="value">Dolares</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <br />
+                    <div class="col-md-3">
+
+                    </div>
+                    <div class="col-md-2">
+                        <button type="button" class="btn btn-default">
+                            <img src="~/Content/img/imagenes/flecha-correcta.png" />
+                            Siguiente
+                        </button>
+                    </div>
+
+                    <div class="col-md-2">
+                        <button type="button" class="btn btn-danger">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+            <div class="divregistroadmin">
+
+                <div class="col-md-12">
+                    <div class="col-md-3">
+                    </div>
+                    <div class="col-md-9">
+                        <span><label>Nombre administrador</label></span>
+                        <input type="text" class="form-control" id="txtuseradmin" />
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="col-md-3">
+                    </div>
+                    <div class="col-md-9">
+                        <span><label>Nombre administrador</label></span>
+                        <input type="text" class="form-control" id="txtuseradmin" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

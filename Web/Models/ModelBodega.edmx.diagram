@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a0cc6acc31264b69be5f1e63f2cd131d" Name="Diagram1" >
+        <EntityTypeShape EntityType="TantaModel.alumno" Width="1.5" PointX="3" PointY="2.75" />
+        <EntityTypeShape EntityType="TantaModel.categoria" Width="1.5" PointX="0.75" PointY="2.75" />
+        <EntityTypeShape EntityType="TantaModel.curso" Width="1.5" PointX="5.25" PointY="7.25" />
+        <EntityTypeShape EntityType="TantaModel.nota" Width="1.5" PointX="7.5" PointY="4.375" />
+        <AssociationConnector Association="TantaModel.FK__alumnos__tipodoc__2D27B809" />
+        <AssociationConnector Association="TantaModel.FK_notas_alumnos" />
+        <AssociationConnector Association="TantaModel.FK__categoria__categ__300424B4" />
+        <AssociationConnector Association="TantaModel.FK_notas_categorias" />
+        <AssociationConnector Association="TantaModel.FK_notas_cursos" />
+        <AssociationConnector Association="TantaModel.alumnos_cursos" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
